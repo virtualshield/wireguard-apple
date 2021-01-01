@@ -432,6 +432,8 @@
 		6FFA5D9F21958ECC0001E2F7 /* ErrorNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNotifier.swift; sourceTree = "<group>"; };
 		6FFA5DA32197085D0001E2F7 /* ActivateOnDemandOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateOnDemandOption.swift; sourceTree = "<group>"; };
 		6FFACD1E21E4D89600E9A2A5 /* ParseError+WireGuardAppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseError+WireGuardAppError.swift"; sourceTree = "<group>"; };
+		9522DD19259F5D190052100C /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Version.xcconfig; path = Config/Version.xcconfig; sourceTree = "<group>"; };
+		9522DD1A259F5D190052100C /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Developer.xcconfig; path = Config/Developer.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -785,6 +787,8 @@
 				6F61F1EA21B937EF00483816 /* WireGuardResult.swift */,
 				6FE1765921C90E87002690EA /* LocalizationHelper.swift */,
 				6FF4AC2B211EC776002C96EB /* Config.xcconfig */,
+				9522DD1A259F5D190052100C /* Developer.xcconfig */,
+				9522DD19259F5D190052100C /* Version.xcconfig */,
 				6F689999218043390012E523 /* WireGuard-Bridging-Header.h */,
 			);
 			name = WireGuardApp;

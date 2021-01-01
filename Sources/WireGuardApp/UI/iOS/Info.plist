@@ -28,7 +28,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.wireguard.config.quick</string>
+				<string>com.config.quick</string>
 			</array>
 		</dict>
 		<dict>
@@ -114,7 +114,7 @@
 				<string>wireguard_doc_logo_320x320.png</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>com.wireguard.config.quick</string>
+			<string>com.config.quick</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -124,7 +124,7 @@
 	</array>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Localized</string>
-	<key>com.virtualshield.testwireguard.ios.app_group_id</key>
+	<key>com.ios.app_group_id</key>
 	<string>group.$(APP_ID_IOS)</string>
 </dict>
 </plist>

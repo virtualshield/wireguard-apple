@@ -192,7 +192,11 @@ class TunnelsListTableViewController: UIViewController {
     }
 
     func presentViewControllerForFileImport() {
+        #if VIRTUALSHIELD
+        let documentTypes = ["com.virtualshield.config.quick", String(kUTTypeText), String(kUTTypeZipArchive)]
+        #else
         let documentTypes = ["com.wireguard.config.quick", String(kUTTypeText), String(kUTTypeZipArchive)]
+        #endif
         let filePicker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .import)
         filePicker.delegate = self
         present(filePicker, animated: true)

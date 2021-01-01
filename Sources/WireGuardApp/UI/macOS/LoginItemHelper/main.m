@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    NSString *appIdInfoDictionaryKey = @"com.wireguard.macos.app_id";
+    NSString *appIdInfoDictionaryKey = @"com.virtualshield.testwireguard.app_id";
     NSString *appId = [NSBundle.mainBundle objectForInfoDictionaryKey:appIdInfoDictionaryKey];
 
     NSString *launchCode = @"LaunchedByWireGuardLoginItemHelper";

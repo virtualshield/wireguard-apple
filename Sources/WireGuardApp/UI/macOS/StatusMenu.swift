@@ -127,12 +127,15 @@ class StatusMenu: NSMenu {
     }
 
     func addApplicationItems() {
+        #if VIRTUALSHIELD
+        #else
         let aboutItem = NSMenuItem(title: tr("macMenuAbout"), action: #selector(AppDelegate.aboutClicked), keyEquivalent: "")
         aboutItem.target = NSApp.delegate
         addItem(aboutItem)
         let quitItem = NSMenuItem(title: tr("macMenuQuit"), action: #selector(AppDelegate.quit), keyEquivalent: "")
         quitItem.target = NSApp.delegate
         addItem(quitItem)
+        #endif
     }
 
     @objc func deactivateClicked() {

@@ -20,7 +20,10 @@ class TunnelsTracker {
             statusItemController?.currentTunnel = currentTunnel
         }
     }
+    #if VIRTUALSHIELD_VPN
+    #else
     weak var manageTunnelsRootVC: ManageTunnelsRootViewController?
+    #endif
 
     private var tunnelsManager: TunnelsManager
     private var tunnelStatusObservers = [AnyObject]()
@@ -69,11 +72,17 @@ extension TunnelsTracker: TunnelsManagerListDelegate {
         tunnelStatusObservers.insert(statusObservationToken, at: index)
 
         statusMenu?.insertTunnelMenuItem(for: tunnel, at: index)
+        #if VIRTUALSHIELD_VPN
+        #else
         manageTunnelsRootVC?.tunnelsListVC?.tunnelAdded(at: index)
+        #endif
     }
 
     func tunnelModified(at index: Int) {
+        #if VIRTUALSHIELD_VPN
+        #else
         manageTunnelsRootVC?.tunnelsListVC?.tunnelModified(at: index)
+        #endif
     }
 
     func tunnelMoved(from oldIndex: Int, to newIndex: Int) {
@@ -81,24 +90,33 @@ extension TunnelsTracker: TunnelsManagerListDelegate {
         tunnelStatusObservers.insert(statusObserver, at: newIndex)
 
         statusMenu?.moveTunnelMenuItem(from: oldIndex, to: newIndex)
+        #if VIRTUALSHIELD_VPN
+        #else
         manageTunnelsRootVC?.tunnelsListVC?.tunnelMoved(from: oldIndex, to: newIndex)
+        #endif
     }
 
     func tunnelRemoved(at index: Int, tunnel: TunnelContainer) {
         tunnelStatusObservers.remove(at: index)
 
         statusMenu?.removeTunnelMenuItem(at: index)
+        #if VIRTUALSHIELD_VPN
+        #else
         manageTunnelsRootVC?.tunnelsListVC?.tunnelRemoved(at: index)
+        #endif
     }
 }
 
 extension TunnelsTracker: TunnelsManagerActivationDelegate {
     func tunnelActivationAttemptFailed(tunnel: TunnelContainer, error: TunnelsManagerActivationAttemptError) {
+        #if VIRTUALSHIELD_VPN
+        #else
         if let manageTunnelsRootVC = manageTunnelsRootVC, manageTunnelsRootVC.view.window?.isVisible ?? false {
             ErrorPresenter.showErrorAlert(error: error, from: manageTunnelsRootVC)
         } else {
             ErrorPresenter.showErrorAlert(error: error, from: nil)
         }
+        #endif
     }
 
     func tunnelActivationAttemptSucceeded(tunnel: TunnelContainer) {
@@ -106,11 +124,14 @@ extension TunnelsTracker: TunnelsManagerActivationDelegate {
     }
 
     func tunnelActivationFailed(tunnel: TunnelContainer, error: TunnelsManagerActivationError) {
+        #if VIRTUALSHIELD_VPN
+        #else
         if let manageTunnelsRootVC = manageTunnelsRootVC, manageTunnelsRootVC.view.window?.isVisible ?? false {
             ErrorPresenter.showErrorAlert(error: error, from: manageTunnelsRootVC)
         } else {
             ErrorPresenter.showErrorAlert(error: error, from: nil)
         }
+        #endif
     }
 
     func tunnelActivationSucceeded(tunnel: TunnelContainer) {

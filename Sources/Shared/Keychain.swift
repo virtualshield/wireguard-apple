@@ -45,7 +45,7 @@ class Keychain {
         items[kSecAttrAccessible] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
 
         #if VIRTUALSHIELD_VPN
-        let appexComponent = "VirtualShieldNetworkExtension_macOS.appex"
+        let appexComponent = "VirtualShieldNetworkExtensionmacOS.appex"
         #else
         let appexComponent = "WireGuardNetworkExtension.appex"
         #endif

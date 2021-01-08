@@ -127,7 +127,7 @@ class StatusMenu: NSMenu {
     }
 
     func addApplicationItems() {
-        #if VIRTUALSHIELD
+        #if VIRTUALSHIELD_VPN
         #else
         let aboutItem = NSMenuItem(title: tr("macMenuAbout"), action: #selector(AppDelegate.aboutClicked), keyEquivalent: "")
         aboutItem.target = NSApp.delegate

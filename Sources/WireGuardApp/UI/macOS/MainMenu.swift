@@ -33,8 +33,11 @@ class MainMenu: NSMenu {
 
         menu.addItem(NSMenuItem.separator())
 
+        #if VIRTUALSHIELD_VPN
+        #else
         menu.addItem(withTitle: tr("macMenuViewLog"),
                      action: #selector(TunnelsListTableViewController.handleViewLogAction), keyEquivalent: "")
+        #endif
 
         menu.addItem(NSMenuItem.separator())
 
@@ -60,15 +63,27 @@ class MainMenu: NSMenu {
     private func createFileMenu() -> NSMenu {
         let menu = NSMenu(title: tr("macMenuFile"))
 
+        #if VIRTUALSHIELD_VPN
+        menu.addItem(withTitle: tr("macMenuAddEmptyTunnel"),
+            action: #selector(AppDelegate.handleAddEmptyTunnelAction), keyEquivalent: "n")
+        menu.addItem(withTitle: tr("macMenuImportTunnels"),
+            action: #selector(AppDelegate.handleImportTunnelAction), keyEquivalent: "o")
+        #else
         menu.addItem(withTitle: tr("macMenuAddEmptyTunnel"),
             action: #selector(TunnelsListTableViewController.handleAddEmptyTunnelAction), keyEquivalent: "n")
         menu.addItem(withTitle: tr("macMenuImportTunnels"),
             action: #selector(TunnelsListTableViewController.handleImportTunnelAction), keyEquivalent: "o")
+        #endif
 
         menu.addItem(NSMenuItem.separator())
 
+        #if VIRTUALSHIELD_VPN
+        menu.addItem(withTitle: tr("macMenuExportTunnels"),
+            action: #selector(AppDelegate.handleExportTunnelsAction), keyEquivalent: "")
+        #else
         menu.addItem(withTitle: tr("macMenuExportTunnels"),
             action: #selector(TunnelsListTableViewController.handleExportTunnelsAction), keyEquivalent: "")
+        #endif
 
         menu.addItem(NSMenuItem.separator())
 
@@ -99,12 +114,21 @@ class MainMenu: NSMenu {
     private func createTunnelMenu() -> NSMenu {
         let menu = NSMenu(title: tr("macMenuTunnel"))
 
+        #if VIRTUALSHIELD_VPN
+        menu.addItem(withTitle: tr("macMenuToggleStatus"), action: #selector(AppDelegate.handleToggleActiveStatusAction), keyEquivalent:"t")
+        #else
         menu.addItem(withTitle: tr("macMenuToggleStatus"), action: #selector(TunnelDetailTableViewController.handleToggleActiveStatusAction), keyEquivalent:"t")
+        #endif
 
         menu.addItem(NSMenuItem.separator())
 
-        menu.addItem(withTitle: tr("macMenuEditTunnel"), action: #selector(TunnelDetailTableViewController.handleEditTunnelAction), keyEquivalent:"e")
-        menu.addItem(withTitle: tr("macMenuDeleteSelected"), action: #selector(TunnelsListTableViewController.handleRemoveTunnelAction), keyEquivalent: "")
+        #if VIRTUALSHIELD_VPN
+        menu.addItem(withTitle: tr("macMenuEditTunnel"), action: #selector(AppDelegate.handleEditTunnelAction), keyEquivalent:"e")
+        menu.addItem(withTitle: tr("macMenuDeleteSelected"), action: #selector(AppDelegate.handleRemoveTunnelAction), keyEquivalent: "")
+        #else
+        menu.addItem(withTitle: tr("macMenuEditTunnel"), action: #selector(AppDelegate.handleEditTunnelAction), keyEquivalent:"e")
+        menu.addItem(withTitle: tr("macMenuDeleteSelected"), action: #selector(AppDelegate.handleRemoveTunnelAction), keyEquivalent: "")
+        #endif
 
         return menu
     }

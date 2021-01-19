@@ -22,6 +22,7 @@ class TunnelsTracker {
     }
     #if VIRTUALSHIELD_VPN
     weak var tunnelsManagerListDelegate: TunnelsManagerListDelegate?
+    weak var tunnelsManagerActivationDelegate: TunnelsManagerActivationDelegate?
     #else
     weak var manageTunnelsRootVC: ManageTunnelsRootViewController?
     #endif
@@ -120,7 +121,11 @@ extension TunnelsTracker: TunnelsManagerListDelegate {
 extension TunnelsTracker: TunnelsManagerActivationDelegate {
     func tunnelActivationAttemptFailed(tunnel: TunnelContainer, error: TunnelsManagerActivationAttemptError) {
         #if VIRTUALSHIELD_VPN
-        ErrorPresenter.showErrorAlert(error: error, from: nil)
+        
+        tunnelsManagerActivationDelegate?.tunnelActivationAttemptFailed(tunnel: tunnel, error: error)
+        return
+        /// Stoping here
+        
         #else
         if let manageTunnelsRootVC = manageTunnelsRootVC, manageTunnelsRootVC.view.window?.isVisible ?? false {
             ErrorPresenter.showErrorAlert(error: error, from: manageTunnelsRootVC)
@@ -131,12 +136,17 @@ extension TunnelsTracker: TunnelsManagerActivationDelegate {
     }
 
     func tunnelActivationAttemptSucceeded(tunnel: TunnelContainer) {
-        // Nothing to do
+        #if VIRTUALSHIELD_VPN
+        tunnelsManagerActivationDelegate?.tunnelActivationAttemptSucceeded(tunnel: tunnel)
+        #endif
     }
 
     func tunnelActivationFailed(tunnel: TunnelContainer, error: TunnelsManagerActivationError) {
         #if VIRTUALSHIELD_VPN
-        ErrorPresenter.showErrorAlert(error: error, from: nil)
+        tunnelsManagerActivationDelegate?.tunnelActivationFailed(tunnel: tunnel, error: error)
+        return
+        /// Stoping here
+
         #else
         if let manageTunnelsRootVC = manageTunnelsRootVC, manageTunnelsRootVC.view.window?.isVisible ?? false {
             ErrorPresenter.showErrorAlert(error: error, from: manageTunnelsRootVC)
@@ -147,6 +157,8 @@ extension TunnelsTracker: TunnelsManagerActivationDelegate {
     }
 
     func tunnelActivationSucceeded(tunnel: TunnelContainer) {
-        // Nothing to do
+        #if VIRTUALSHIELD_VPN
+        tunnelsManagerActivationDelegate?.tunnelActivationSucceeded(tunnel: tunnel)
+        #endif
     }
 }

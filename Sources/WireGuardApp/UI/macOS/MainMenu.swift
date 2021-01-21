@@ -64,10 +64,6 @@ class MainMenu: NSMenu {
         let menu = NSMenu(title: tr("macMenuFile"))
 
         #if VIRTUALSHIELD_VPN
-        menu.addItem(withTitle: tr("macMenuAddEmptyTunnel"),
-            action: #selector(AppDelegate.handleAddEmptyTunnelAction), keyEquivalent: "n")
-        menu.addItem(withTitle: tr("macMenuImportTunnels"),
-            action: #selector(AppDelegate.handleImportTunnelAction), keyEquivalent: "o")
         #else
         menu.addItem(withTitle: tr("macMenuAddEmptyTunnel"),
             action: #selector(TunnelsListTableViewController.handleAddEmptyTunnelAction), keyEquivalent: "n")
@@ -78,8 +74,6 @@ class MainMenu: NSMenu {
         menu.addItem(NSMenuItem.separator())
 
         #if VIRTUALSHIELD_VPN
-        menu.addItem(withTitle: tr("macMenuExportTunnels"),
-            action: #selector(AppDelegate.handleExportTunnelsAction), keyEquivalent: "")
         #else
         menu.addItem(withTitle: tr("macMenuExportTunnels"),
             action: #selector(TunnelsListTableViewController.handleExportTunnelsAction), keyEquivalent: "")

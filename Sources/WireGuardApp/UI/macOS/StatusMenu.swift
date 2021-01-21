@@ -118,12 +118,18 @@ class StatusMenu: NSMenu {
     }
 
     func addTunnelManagementItems() {
+        #if VIRTUALSHIELD_VPN
+        let manageItem = NSMenuItem(title: "Open VirtualShield Dashboard", action: #selector(manageTunnelsClicked), keyEquivalent: "")
+        manageItem.target = self
+        addItem(manageItem)
+        #else
         let manageItem = NSMenuItem(title: tr("macMenuManageTunnels"), action: #selector(manageTunnelsClicked), keyEquivalent: "")
         manageItem.target = self
         addItem(manageItem)
         let importItem = NSMenuItem(title: tr("macMenuImportTunnels"), action: #selector(importTunnelsClicked), keyEquivalent: "")
         importItem.target = self
         addItem(importItem)
+        #endif
     }
 
     func addApplicationItems() {

@@ -121,11 +121,11 @@ extension TunnelsTracker: TunnelsManagerListDelegate {
 extension TunnelsTracker: TunnelsManagerActivationDelegate {
     func tunnelActivationAttemptFailed(tunnel: TunnelContainer, error: TunnelsManagerActivationAttemptError) {
         #if VIRTUALSHIELD_VPN
-        
+
         tunnelsManagerActivationDelegate?.tunnelActivationAttemptFailed(tunnel: tunnel, error: error)
         return
         /// Stoping here
-        
+
         #else
         if let manageTunnelsRootVC = manageTunnelsRootVC, manageTunnelsRootVC.view.window?.isVisible ?? false {
             ErrorPresenter.showErrorAlert(error: error, from: manageTunnelsRootVC)

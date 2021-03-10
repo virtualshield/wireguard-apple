@@ -4,11 +4,13 @@
 import Cocoa
 
 class StatusItemController {
+    #if VIRTUALSHIELD_VPN
     var currentTunnel: TunnelContainer? {
         didSet {
             updateStatusItemImage()
         }
     }
+    #endif
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let statusBarImageWhenActive = NSImage(named: "StatusBarIcon")!
@@ -27,6 +29,7 @@ class StatusItemController {
     }
 
     func updateStatusItemImage() {
+        #if VIRTUALSHIELD_VPN
         guard let currentTunnel = currentTunnel else {
             stopActivatingAnimation()
             statusItem.button?.image = statusBarImageWhenInactive
@@ -42,6 +45,7 @@ class StatusItemController {
         case .activating, .waiting, .reasserting, .restarting, .deactivating:
             startActivatingAnimation()
         }
+        #endif
     }
 
     func startActivatingAnimation() {

@@ -8,6 +8,8 @@ class ErrorPresenter: ErrorPresenterProtocol {
     static func showErrorAlert(title: String, message: String, from sourceVC: AnyObject?, onPresented: (() -> Void)?, onDismissal: (() -> Void)?) {
         guard let sourceVC = sourceVC as? UIViewController else { return }
 
+        VSSentryController.shared.log(message: "\(title): \(message)")
+
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             onDismissal?()
         }

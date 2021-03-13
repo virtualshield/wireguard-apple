@@ -96,9 +96,11 @@ class LogViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
+        #if VIRTUALSHIELD_VPN
+        #else
         closeButton.target = self
         closeButton.action = #selector(closeClicked)
-
+        #endif
         saveButton.target = self
         saveButton.action = #selector(saveClicked)
         saveButton.isEnabled = false

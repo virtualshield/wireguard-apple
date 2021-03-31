@@ -96,11 +96,8 @@ class LogViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        #if VIRTUALSHIELD_VPN
-        #else
         closeButton.target = self
         closeButton.action = #selector(closeClicked)
-        #endif
         saveButton.target = self
         saveButton.action = #selector(saveClicked)
         saveButton.isEnabled = false
@@ -128,7 +125,10 @@ class LogViewController: NSViewController {
         let internalSpacing: CGFloat = 10
 
         let buttonRowStackView = NSStackView()
+        #if VIRTUALSHIELD_VPN
+        #else
         buttonRowStackView.addView(closeButton, in: .leading)
+        #endif
         buttonRowStackView.addView(saveButton, in: .trailing)
         buttonRowStackView.orientation = .horizontal
         buttonRowStackView.spacing = internalSpacing

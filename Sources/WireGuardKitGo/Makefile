@@ -21,7 +21,7 @@ GOARCH_x86_64 := amd64
 build: $(DESTDIR)/libwg-go.a
 version-header: $(DESTDIR)/wireguard-go-version.h
 
-REAL_GOROOT := /opt/homebrew/Cellar/go/1.16.2/libexec
+REAL_GOROOT := $(shell go env GOROOT 2>/dev/null)
 export GOROOT := $(BUILDDIR)/goroot
 $(GOROOT)/.prepared:
 	[ -n "$(REAL_GOROOT)" ]

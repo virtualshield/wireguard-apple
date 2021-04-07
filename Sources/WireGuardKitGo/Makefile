@@ -3,7 +3,7 @@
 # Copyright (C) 2018-2019 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
 
 # These are generally passed to us by xcode, but we set working defaults for standalone compilation too.
-ARCHS ?= x86_64 #TODO: add arm64 to this list once we support apple silicon
+ARCHS ?= x86_64 arm64 #TODO: add arm64 to this list once we support apple silicon
 SDK_NAME ?= macosx
 SDKROOT ?= $(shell xcrun --sdk $(SDK_NAME) --show-sdk-path)
 CONFIGURATION_BUILD_DIR ?= $(CURDIR)/out
@@ -27,7 +27,7 @@ $(GOROOT)/.prepared:
 	[ -n "$(REAL_GOROOT)" ]
 	mkdir -p "$(GOROOT)"
 	rsync -a --delete --exclude=pkg/obj/go-build "$(REAL_GOROOT)/" "$(GOROOT)/"
-	cat goruntime-*.diff | patch -p1 -f -N -r- -d "$(GOROOT)"
+	#cat goruntime-*.diff | patch -p1 -f -N -r- -d "$(GOROOT)"
 	touch "$@"
 
 define libwg-go-a

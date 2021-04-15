@@ -144,7 +144,7 @@ struct log *open_log(const char *file_name)
 	int fd;
 	struct log *log;
 
-	fd = open(file_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR, 0666);
+	fd = open(file_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 	if (fd < 0)
 		return NULL;
 	if (ftruncate(fd, sizeof(*log)))

@@ -20,7 +20,8 @@ extension FileManager {
             os_log("Cannot obtain app group ID from bundle", log: OSLog.default, type: .error)
             return nil
         }
-        guard let sharedFolderURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId) else {
+        guard let sharedFolderURL =
+                FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId) else {
             wg_log(.error, message: "Cannot obtain shared folder URL")
             return nil
         }

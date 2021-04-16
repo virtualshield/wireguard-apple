@@ -25,28 +25,25 @@ enum ActivateOnDemandSSIDOption: Equatable {
 }
 
 extension ActivateOnDemandOption {
-    func apply(on tunnelProviderManager: NETunnelProviderManager) {
-        let rules: [NEOnDemandRule]?
+    var onDemandRules: [NEOnDemandRule]? {
         switch self {
         case .off:
-            rules = nil
+            return nil
         case .wiFiInterfaceOnly(let ssidOption):
-            rules = ssidOnDemandRules(option: ssidOption) + [NEOnDemandRuleDisconnect(interfaceType: nonWiFiInterfaceType)]
+            return ssidOnDemandRules(option: ssidOption) + [NEOnDemandRuleDisconnect(interfaceType: nonWiFiInterfaceType)]
         case .nonWiFiInterfaceOnly:
-            rules = [NEOnDemandRuleConnect(interfaceType: nonWiFiInterfaceType), NEOnDemandRuleDisconnect(interfaceType: .wiFi)]
+            return [NEOnDemandRuleConnect(interfaceType: nonWiFiInterfaceType), NEOnDemandRuleDisconnect(interfaceType: .wiFi)]
         case .anyInterface(let ssidOption):
             if case .anySSID = ssidOption {
-                rules = [NEOnDemandRuleConnect(interfaceType: .any)]
+                return [NEOnDemandRuleConnect(interfaceType: .any)]
             } else {
-                rules = ssidOnDemandRules(option: ssidOption) + [NEOnDemandRuleConnect(interfaceType: nonWiFiInterfaceType)]
+                return ssidOnDemandRules(option: ssidOption) + [NEOnDemandRuleConnect(interfaceType: nonWiFiInterfaceType)]
             }
         }
-        tunnelProviderManager.onDemandRules = rules
-        tunnelProviderManager.isOnDemandEnabled = self != .off
     }
 
     init(from tunnelProviderManager: NETunnelProviderManager) {
-        if tunnelProviderManager.isOnDemandEnabled, let onDemandRules = tunnelProviderManager.onDemandRules {
+        if let onDemandRules = tunnelProviderManager.onDemandRules {
             self = ActivateOnDemandOption.create(from: onDemandRules)
         } else {
             self = .off

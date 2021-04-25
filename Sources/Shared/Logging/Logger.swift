@@ -4,7 +4,6 @@
 import Foundation
 import os.log
 
-#if VIRTUALSHIELD_VPN || VIRTUALSHIELD_WIREGUARD
 public class Logger {
     enum LoggerError: Error {
         case openFailure
@@ -54,17 +53,13 @@ public class Logger {
         Logger.global?.log(message: "App version: \(appVersion)")
     }
 }
-#endif
+
 func wg_log(_ type: OSLogType, staticMessage msg: StaticString) {
     os_log(msg, log: OSLog.default, type: type)
-    #if VIRTUALSHIELD_VPN || VIRTUALSHIELD_WIREGUARD
     Logger.global?.log(message: "\(msg)")
-    #endif
 }
 
 func wg_log(_ type: OSLogType, message msg: String) {
     os_log("%{public}s", log: OSLog.default, type: type, msg)
-    #if VIRTUALSHIELD_VPN || VIRTUALSHIELD_WIREGUARD
     Logger.global?.log(message: msg)
-    #endif
 }

@@ -8,9 +8,6 @@ class ErrorPresenter: ErrorPresenterProtocol {
         let alert = NSAlert()
         alert.messageText = title
         alert.informativeText = message
-        #if VIRTUALSHIELD_VPN
-        VSSentryController.shared.log(message: "\(title): \(message)")
-        #endif
         onPresented?()
         if let sourceVC = sourceVC as? NSViewController {
             NSApp.activate(ignoringOtherApps: true)

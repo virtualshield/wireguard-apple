@@ -44,12 +44,7 @@ class Keychain {
         items[kSecAttrSynchronizable] = false
         items[kSecAttrAccessible] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
 
-        #if VIRTUALSHIELD_VPN
-        let appexComponent = "VirtualShieldNetworkExtension.appex"
-        #else
-        let appexComponent = "WireGuardNetworkExtension.appex"
-        #endif
-        guard let extensionPath = Bundle.main.builtInPlugInsURL?.appendingPathComponent(appexComponent, isDirectory: true).path else {
+        guard let extensionPath = Bundle.main.builtInPlugInsURL?.appendingPathComponent("WireGuardNetworkExtension.appex", isDirectory: true).path else {
             wg_log(.error, staticMessage: "Unable to determine app extension path")
             return nil
         }
